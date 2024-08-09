@@ -1,0 +1,73 @@
+[ 2024-08-09 09:12:36,259 ] 225 werkzeug - WARNING -  * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+[ 2024-08-09 09:12:36,259 ] 225 werkzeug - INFO -  * Running on http://192.168.1.20:8080/ (Press CTRL+C to quit)
+[ 2024-08-09 09:12:44,319 ] 225 werkzeug - INFO - 192.168.1.20 - - [09/Aug/2024 09:12:44] "GET / HTTP/1.1" 200 -
+[ 2024-08-09 09:12:58,523 ] 69 root - INFO - Entered initiate_data_ingestion method of Data_Ingestion class
+[ 2024-08-09 09:12:58,523 ] 39 root - INFO - Exporting data from mongodb
+[ 2024-08-09 09:12:58,524 ] 46 root - INFO - Saving exported data into feature store file path: artifacts\08_09_2024_09_12_34\data_ingestion
+[ 2024-08-09 09:13:06,042 ] 48 root - INFO - Shape of phising_08012020_120000: (33165, 31)
+[ 2024-08-09 09:13:06,518 ] 74 root - INFO - Got the data from mongodb
+[ 2024-08-09 09:13:06,518 ] 76 root - INFO - Exited initiate_data_ingestion method of Data_Ingestion class
+[ 2024-08-09 09:13:06,518 ] 252 root - INFO - Entered initiate_data_validation method of Data_Validation class
+[ 2024-08-09 09:13:06,519 ] 255 root - INFO - Initiated data validation for the dataset
+[ 2024-08-09 09:13:06,909 ] 79 root - INFO - Entered initiate_data_transformation method of Data_Transformation class
+[ 2024-08-09 09:13:07,103 ] 135 root - INFO - Unwanted spaces removal Successful.Exited the remove_unwanted_spaces method of the Preprocessor class
+[ 2024-08-09 09:13:07,287 ] 41 root - INFO - Entered the save_object method of MainUtils class
+[ 2024-08-09 09:13:07,291 ] 47 root - INFO - Exited the save_object method of MainUtils class
+[ 2024-08-09 09:13:07,299 ] 167 root - INFO - Splitting training and testing input and target feature
+[ 2024-08-09 09:13:07,299 ] 169 root - INFO - Extracting model config file path
+[ 2024-08-09 09:13:07,300 ] 56 root - INFO - Entered the load_object method of MainUtils class
+[ 2024-08-09 09:13:07,301 ] 62 root - INFO - Exited the load_object method of MainUtils class
+[ 2024-08-09 09:13:07,301 ] 173 root - INFO - Extracting model config file path
+[ 2024-08-09 09:24:12,989 ] 208 root - INFO - Best found model on both training and testing dataset
+[ 2024-08-09 09:24:12,990 ] 215 root - INFO - Saving model at path: artifacts\08_09_2024_09_12_34\model_trainer\trained_model\model.pkl
+[ 2024-08-09 09:24:12,990 ] 41 root - INFO - Entered the save_object method of MainUtils class
+[ 2024-08-09 09:24:13,007 ] 47 root - INFO - Exited the save_object method of MainUtils class
+[ 2024-08-09 09:24:13,012 ] 1457 app - ERROR - Exception on /train [GET]
+Traceback (most recent call last):
+  File "D:\Bhavesh\Machine learning\New folder\Phishing - classifier\src\components\model_trainer.py", line 226, in initiate_model_trainer
+    self.utils.upload_file(from_filename=self.model_trainer_config.trained_model_path,
+AttributeError: 'MainUtils' object has no attribute 'upload_file'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Bhavesh\Machine learning\New folder\Phishing - classifier\src\pipeline\train_pipeline.py", line 50, in start_model_training
+    model_score = model_trainer.initiate_model_trainer(
+  File "D:\Bhavesh\Machine learning\New folder\Phishing - classifier\src\components\model_trainer.py", line 233, in initiate_model_trainer
+    raise CustomException(e, sys)
+src.exception.CustomException: 'MainUtils' object has no attribute 'upload_file'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Bhavesh\Machine learning\New folder\Phishing - classifier\src\pipeline\train_pipeline.py", line 67, in run_pipeline
+    accuracy_score = self.start_model_training(x_train, y_train, x_test, y_test, preprocessor_path)
+  File "D:\Bhavesh\Machine learning\New folder\Phishing - classifier\src\pipeline\train_pipeline.py", line 60, in start_model_training
+    raise CustomException(e, sys)
+src.exception.CustomException: 'MainUtils' object has no attribute 'upload_file'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "app.py", line 20, in train_route
+    train_pipeline.run_pipeline()
+  File "D:\Bhavesh\Machine learning\New folder\Phishing - classifier\src\pipeline\train_pipeline.py", line 72, in run_pipeline
+    raise CustomException(e, sys)
+src.exception.CustomException: 'MainUtils' object has no attribute 'upload_file'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "d:\Bhavesh\Machine learning\New folder\Phishing - classifier\env\lib\site-packages\flask\app.py", line 2073, in wsgi_app
+    response = self.full_dispatch_request()
+  File "d:\Bhavesh\Machine learning\New folder\Phishing - classifier\env\lib\site-packages\flask\app.py", line 1518, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "d:\Bhavesh\Machine learning\New folder\Phishing - classifier\env\lib\site-packages\flask\app.py", line 1516, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "d:\Bhavesh\Machine learning\New folder\Phishing - classifier\env\lib\site-packages\flask\app.py", line 1502, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "app.py", line 25, in train_route
+    raise CustomException(e,sys)
+src.exception.CustomException: 'MainUtils' object has no attribute 'upload_file'
+[ 2024-08-09 09:24:13,016 ] 225 werkzeug - INFO - 192.168.1.20 - - [09/Aug/2024 09:24:13] "[35m[1mGET /train HTTP/1.1[0m" 500 -
